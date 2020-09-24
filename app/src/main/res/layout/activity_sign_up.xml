@@ -6,8 +6,6 @@
     tools:context=".SignUpActivity"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-
         <ProgressBar
             android:id="@+id/progress_circular"
             android:layout_width="50dp"

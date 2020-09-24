@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -112,7 +113,6 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             StorageReference storageReference = reference.child("profile/" + System.currentTimeMillis());
-
                                     storageReference.putFile(imageurl)
                                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                         @Override
@@ -262,6 +262,7 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             Intent intent = new Intent();
             intent.setType("image/*");
+
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(intent, REQUEST_CODE);
         }
@@ -280,9 +281,12 @@ public class SignUpActivity extends AppCompatActivity {
                 GoogleSignInAccount  account = task.getResult(ApiException.class);
                 if (account != null){
                     firebaseAuthWithGoogle(account);
+                    Log.i("ACCOUNT","Account is not null");
                 }
             } catch (ApiException e) {
                 e.printStackTrace();
+                Log.i("ACCOUNT","Account is null");
+
             }
 
             progressBar.setVisibility(View.GONE);
